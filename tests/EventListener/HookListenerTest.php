@@ -62,6 +62,97 @@ class HookListenerTest extends ContaoTestCase
     }
 
     /**
+     * Test the parse template TL_HOOK without an global $objPage.
+     */
+    public function testParseTemplateWithoutObjPage()
+    {
+        $template = new FrontendTemplate('picture_default');
+
+        $listener = new HookListener($this->mockContaoFramework([]));
+        $this->assertNull($listener->parseTemplate($template));
+        $this->assertSame('picture_default', $template->getName());
+    }
+
+    /**
+     * Test the parse template TL_HOOK without page layout id.
+     */
+    public function testParseTemplateWithoutLayoutId()
+    {
+        $template = new FrontendTemplate('picture_default');
+
+        global $objPage;
+
+        $objPage = $this->mockClassWithProperties(PageModel::class, []);
+
+        $listener = new HookListener($this->mockContaoFramework([]));
+        $this->assertNull($listener->parseTemplate($template));
+        $this->assertSame('picture_default', $template->getName());
+    }
+
+    /**
+     * Test the parse template TL_HOOK for invalid templates.
+     */
+    public function testParseTemplateWithoutLayoutModel()
+    {
+        $adapter = $this->mockAdapter(['findByPk']);
+
+        $adapter
+            ->method('findByPk')
+            ->willReturn(null);
+
+        global $objPage;
+
+        $objPage = $this->mockClassWithProperties(PageModel::class, [
+            'layoutId' => 2,
+        ]);
+
+        $collector = new ContaoDataCollector([]);
+        $collector->setFramework($this->mockContaoFramework([LayoutModel::class => $adapter]));
+        $collector->collect(new Request(), new Response());
+
+        $template = new FrontendTemplate('picture_default');
+
+        $listener = new HookListener($this->mockContaoFramework([LayoutModel::class => $adapter]));
+        $this->assertNull($listener->parseTemplate($template));
+        $this->assertSame('picture_default', $template->getName());
+    }
+
+    /**
+     * Test the parse template TL_HOOK for invalid templates.
+     */
+    public function testParseTemplateWithDisabledLazyLoadScript()
+    {
+        $layout = $this->mockClassWithProperties(LayoutModel::class, [
+            'name' => 'Default',
+            'id' => 2,
+            'template' => 'fe_page',
+            'scripts' => [], // enable js_lazyload template
+        ]);
+
+        $adapter = $this->mockAdapter(['findByPk']);
+
+        $adapter
+            ->method('findByPk')
+            ->willReturn($layout);
+
+        global $objPage;
+
+        $objPage = $this->mockClassWithProperties(PageModel::class, [
+            'layoutId' => 2,
+        ]);
+
+        $collector = new ContaoDataCollector([]);
+        $collector->setFramework($this->mockContaoFramework([LayoutModel::class => $adapter]));
+        $collector->collect(new Request(), new Response());
+
+        $template = new FrontendTemplate('picture_default');
+
+        $listener = new HookListener($this->mockContaoFramework([LayoutModel::class => $adapter]));
+        $this->assertNull($listener->parseTemplate($template));
+        $this->assertSame('picture_default', $template->getName());
+    }
+
+    /**
      * Tests the parse template TL_HOOK.
      */
     public function testRenamePictureTemplateWithinParseTemplate()
