@@ -51,6 +51,17 @@ class HookListenerTest extends ContaoTestCase
     }
 
     /**
+     * Test the parse template TL_HOOK for invalid templates.
+     */
+    public function testParseTemplateOtherTemplates()
+    {
+        $template = new FrontendTemplate('fe_page');
+
+        $listener = new HookListener($this->mockContaoFramework([]));
+        $this->assertNull($listener->parseTemplate($template));
+    }
+
+    /**
      * Tests the parse template TL_HOOK.
      */
     public function testRenamePictureTemplateWithinParseTemplate()
