@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2017 Heimrich & Hannot GmbH
+ * Copyright (c) 2018 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0+
  */
@@ -49,6 +49,13 @@ $legacyLoader = function ($class) {
         class_alias($namespaced, $class);
     }
 };
+
+$prefixes = $loader->getPrefixesPsr4();
+
+if (isset($prefixes['Contao\\CoreBundle\\'])) {
+    $path = $prefixes['Contao\\CoreBundle\\'][0];
+    $loader->addPsr4('Contao\\CoreBundle\\Tests\\', $path.'/../tests');
+}
 
 spl_autoload_register($legacyLoader, true, true);
 

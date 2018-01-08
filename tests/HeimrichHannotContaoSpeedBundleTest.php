@@ -1,14 +1,14 @@
 <?php
 
 /*
- * Copyright (c) 2017 Heimrich & Hannot GmbH
+ * Copyright (c) 2018 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0+
  */
 
 namespace HeimrichHannot\SpeedBundle\Tests;
 
-use HeimrichHannot\HeadBundle\HeimrichHannotContaoHeadBundle;
+use HeimrichHannot\SpeedBundle\HeimrichHannotContaoSpeedBundle;
 use PHPUnit\Framework\TestCase;
 
 class HeimrichHannotContaoSpeedBundleTest extends TestCase

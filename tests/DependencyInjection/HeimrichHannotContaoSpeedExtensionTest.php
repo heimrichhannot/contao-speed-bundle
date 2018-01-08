@@ -1,7 +1,7 @@
 <?php
 
 /*
- * Copyright (c) 2017 Heimrich & Hannot GmbH
+ * Copyright (c) 2018 Heimrich & Hannot GmbH
  *
  * @license LGPL-3.0+
  */
@@ -13,7 +13,7 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 
-class HeimrichHannotContaoHeadExtensionTest extends TestCase
+class HeimrichHannotContaoSpeedExtensionTest extends TestCase
 {
     /**
      * @var ContainerBuilder

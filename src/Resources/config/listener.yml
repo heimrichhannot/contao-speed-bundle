@@ -1,0 +1,5 @@
+services:
+    huh.speed.listener.hooks:
+      class: HeimrichHannot\SpeedBundle\EventListener\HookListener
+      arguments:
+        - "@contao.framework"
