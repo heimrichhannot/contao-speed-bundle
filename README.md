@@ -15,7 +15,7 @@ This module improves the performance of your contao environment.
 
 Offscreen images are images that appear below the fold. Since users can't see offscreen images when they load a page, there's no reason to download the offscreen images as part of the initial page load. In other words, deferring the load of offscreen images can speed up page load time and time to interactive.
 
-We ship an adjusted `picture_default.html5` with this bundle to provide proper lazy loading setup for images. If in case you use custom `picture-*.html5` templates adjust like the following:
+We ship an adjusted `picture_lazyload.html5` with this bundle to provide proper lazy loading setup for images (`picture_default.html5` will be replaced with `picture_lazyload.html5` if script `js_lazyload` in `tl_layout.scripts` is enabled). If in case you use custom `picture-*.html5` templates adjust like the following:
 
 #### How to use?
 
