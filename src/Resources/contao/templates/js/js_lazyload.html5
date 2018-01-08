@@ -1,7 +1,7 @@
 <?php
 
 // Add the lazyload style sheet
-//$GLOBALS['TL_CSS'][] = TL_ASSETS_URL . 'assets/lazyload/css/lazyload.css|static';
+$GLOBALS['TL_CSS'][] = TL_ASSETS_URL . 'assets/lazyload/css/lazyload.min.css|static';
 
 ?>
 
