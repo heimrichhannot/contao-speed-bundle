@@ -9,22 +9,24 @@
 namespace HeimrichHannot\SpeedBundle\Tests\EventListener;
 
 use Contao\CoreBundle\DataCollector\ContaoDataCollector;
-use Contao\CoreBundle\Framework\Adapter;
-use Contao\CoreBundle\Tests\TestCase;
 use Contao\FrontendTemplate;
 use Contao\LayoutModel;
 use Contao\System;
+use Contao\TestCase\ContaoTestCase;
+use HeimrichHannot\Modal\PageModel;
 use HeimrichHannot\SpeedBundle\EventListener\HookListener;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class HookListenerTest extends TestCase
+class HookListenerTest extends ContaoTestCase
 {
     /**
      * {@inheritdoc}
      */
     public static function setUpBeforeClass()
     {
+        \define('TL_ROOT', static::getRootDir());
+
         $_SERVER['HTTP_HOST'] = 'localhost';
     }
 
@@ -35,11 +37,7 @@ class HookListenerTest extends TestCase
     {
         parent::setUp();
 
-        if (!\defined('TL_ROOT')) {
-            \define('TL_ROOT', $this->getRootDir());
-        }
-
-        System::setContainer($this->mockContainerWithContaoScopes());
+        System::setContainer($this->mockContainer());
     }
 
     /**
@@ -57,30 +55,27 @@ class HookListenerTest extends TestCase
      */
     public function testRenamePictureTemplateWithinParseTemplate()
     {
-        $layout = new \stdClass();
-        $layout->name = 'Default';
-        $layout->id = 2;
-        $layout->template = 'fe_page';
-        $layout->scripts = ['js_lazyload']; // enable js_lazyload template
+        $layout = $this->mockClassWithProperties(LayoutModel::class, [
+            'name' => 'Default',
+            'id' => 2,
+            'template' => 'fe_page',
+            'scripts' => ['js_lazyload'], // enable js_lazyload template
+        ]);
 
-        $adapter = $this
-            ->getMockBuilder(Adapter::class)
-            ->setMethods(['__call'])
-            ->disableOriginalConstructor()
-            ->getMock();
+        $adapter = $this->mockAdapter(['findByPk']);
 
         $adapter
-            ->expects($this->any())
-            ->method('__call')
+            ->method('findByPk')
             ->willReturn($layout);
 
         global $objPage;
 
-        $objPage = new \stdClass();
-        $objPage->layoutId = 2;
+        $objPage = $this->mockClassWithProperties(PageModel::class, [
+            'layoutId' => 2,
+        ]);
 
         $collector = new ContaoDataCollector([]);
-        $collector->setFramework($this->mockContaoFramework(null, null, [LayoutModel::class => $adapter]));
+        $collector->setFramework($this->mockContaoFramework([LayoutModel::class => $adapter]));
         $collector->collect(new Request(), new Response());
 
         $this->assertSame(
@@ -98,9 +93,19 @@ class HookListenerTest extends TestCase
 
         $template = new FrontendTemplate('picture_default');
 
-        $listener = new HookListener($this->mockContaoFramework());
+        $listener = new HookListener($this->mockContaoFramework([LayoutModel::class => $adapter]));
         $listener->parseTemplate($template);
 
         $this->assertSame('picture_lazyload', $template->getName());
+    }
+
+    /**
+     * Returns the path to the fixtures directory.
+     *
+     * @return string
+     */
+    public static function getRootDir()
+    {
+        return __DIR__.DIRECTORY_SEPARATOR.'Fixtures';
     }
 }

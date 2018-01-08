@@ -50,13 +50,6 @@ $legacyLoader = function ($class) {
     }
 };
 
-$prefixes = $loader->getPrefixesPsr4();
-
-if (isset($prefixes['Contao\\CoreBundle\\'])) {
-    $path = $prefixes['Contao\\CoreBundle\\'][0];
-    $loader->addPsr4('Contao\\CoreBundle\\Tests\\', $path.'/../tests');
-}
-
 spl_autoload_register($legacyLoader, true, true);
 
 return $loader;

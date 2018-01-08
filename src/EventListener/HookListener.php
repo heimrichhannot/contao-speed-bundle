@@ -10,6 +10,7 @@ namespace HeimrichHannot\SpeedBundle\EventListener;
 
 use Contao\CoreBundle\Framework\ContaoFrameworkInterface;
 use Contao\LayoutModel;
+use Contao\StringUtil;
 use Contao\Template;
 
 class HookListener
@@ -36,10 +37,25 @@ class HookListener
      */
     public function parseTemplate($template)
     {
-        global $objPage;
-
-        if (null === $objPage || !$objPage->layout || null === ($layout = LayoutModel::findByPk($objPage->layout))) {
+        if ('picture_default' !== $template->getName()) {
             return;
         }
+
+        global $objPage;
+
+        /**
+         * @var LayoutModel
+         */
+        $adapter = $this->framework->getAdapter(LayoutModel::class);
+
+        if (null === $objPage || !$objPage->layoutId || null === ($layout = $adapter->findByPk($objPage->layoutId))) {
+            return;
+        }
+
+        if (!in_array('js_lazyload', StringUtil::deserialize($layout->scripts, true), true)) {
+            return;
+        }
+
+        $template->setName('picture_lazyload');
     }
 }
