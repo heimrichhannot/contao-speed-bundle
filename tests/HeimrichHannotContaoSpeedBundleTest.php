@@ -22,4 +22,17 @@ class HeimrichHannotContaoSpeedBundleTest extends TestCase
 
         $this->assertInstanceOf(HeimrichHannotContaoSpeedBundle::class, $bundle);
     }
+
+    /**
+     * Tests the getContainerExtension() method.
+     */
+    public function testReturnsTheContainerExtension()
+    {
+        $bundle = new HeimrichHannotContaoSpeedBundle();
+
+        $this->assertInstanceOf(
+            'HeimrichHannot\SpeedBundle\DependencyInjection\HeimrichHannotContaoSpeedExtension',
+            $bundle->getContainerExtension()
+        );
+    }
 }

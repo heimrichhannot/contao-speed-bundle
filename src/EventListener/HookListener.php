@@ -35,7 +35,7 @@ class HookListener
      *
      * @param Template $template
      */
-    public function parseTemplate($template)
+    public function parseTemplate($template): void
     {
         if ('picture_default' !== $template->getName()) {
             return;
