@@ -83,7 +83,6 @@ class HookListenerTest extends ContaoTestCase
 
         $this->assertSame(
             [
-                'version' => '',
                 'framework' => false,
                 'models' => 0,
                 'frontend' => true,
