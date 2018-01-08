@@ -5,7 +5,7 @@
   "license": "LGPL-3.0+",
   "require": {
     "php": "^7.1",
-    "contao/core-bundle": "^4.3.1",
+    "contao/core-bundle": "^4.4",
     "heimrichhannot-contao-components/lazyload": "^1.0"
   },
   "require-dev": {
