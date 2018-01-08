@@ -78,6 +78,9 @@ class HookListenerTest extends ContaoTestCase
         $collector->setFramework($this->mockContaoFramework([LayoutModel::class => $adapter]));
         $collector->collect(new Request(), new Response());
 
+        $summary = $collector->getSummary();
+        unset($summary['version']); // unset in order to test multiple contao versions
+
         $this->assertSame(
             [
                 'version' => '',
@@ -88,7 +91,7 @@ class HookListenerTest extends ContaoTestCase
                 'layout' => 'Default (ID 2)',
                 'template' => 'fe_page',
             ],
-            $collector->getSummary()
+            $summary
         );
 
         $template = new FrontendTemplate('picture_default');
