@@ -16,6 +16,11 @@ $GLOBALS['TL_CSS'][] = TL_ASSETS_URL . 'assets/lazyload/css/lazyload.min.css|sta
             v = 8;
         }
 
+        // safari works best with version 10, but window object has no IntersectionObserver -> force version 10
+        if (window.navigator.userAgent.indexOf('Safari') > -1) {
+            v = 10;
+        }
+
         s.src = '<?= TL_ASSETS_URL ?>assets/lazyload/js/' + v + '/lazyload.min.js';
         w.lazyLoadOptions = [
             {

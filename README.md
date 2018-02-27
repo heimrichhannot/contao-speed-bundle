@@ -44,3 +44,9 @@ We also support lazy loading for background images. To take advantage of this fe
 ```
 <div class="lazy" data-src="../img/44721746JJ_15_a.jpg"></div>
 ```
+**Lazy load inside sliders like slick slider**
+
+In order to prevent bouncing of cloned carousel slide images (using infinite looping), the `lazyLoad` technique should be set to `progressive` instead of `on-demand`.
+
+ 
+
