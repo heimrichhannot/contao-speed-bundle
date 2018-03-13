@@ -37,7 +37,7 @@ class HookListener
      */
     public function parseTemplate($template): void
     {
-        if ('picture_default' !== $template->getName()) {
+        if ('picture_default' !== $template->getName() || false === $template->lazyload ) {
             return;
         }
 

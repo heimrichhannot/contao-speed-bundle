@@ -49,4 +49,33 @@ We also support lazy loading for background images. To take advantage of this fe
 In order to prevent bouncing of cloned carousel slide images (using infinite looping), the `lazyLoad` technique should be set to `progressive` instead of `on-demand`.
 
  
+#### Prevent lazy loading 
 
+If you want to prevent your image from being lazy loaded, you have to adjust your template and add `['lazyload' => false]` to the picture template data.
+
+```
+<?php $this->extend('block_searchable'); ?>
+
+<?php $this->block('content'); ?>
+
+  <figure class="image_container"<?php if ($this->margin): ?> style="<?= $this->margin ?>"<?php endif; ?> itemscope itemtype="http://schema.org/ImageObject">
+
+    <?php if ($this->href): ?>
+      <a href="<?= $this->href ?>"<?php if ($this->linkTitle): ?> title="<?= $this->linkTitle ?>"<?php endif; ?><?= $this->attributes ?> itemprop="contentUrl">
+    <?php endif; ?>
+
+    <?php $this->insert('picture_default', array_merge(['lazyload' => false] ,$this->picture)); ?>
+
+    <?php if ($this->href): ?>
+      </a>
+    <?php endif; ?>
+
+    <?php if ($this->caption): ?>
+      <figcaption class="caption" itemprop="caption"><?= $this->caption ?></figcaption>
+    <?php endif; ?>
+
+  </figure>
+
+<?php $this->endblock(); ?>
+```
+*Example: ce_image.html5*

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2018-03-13
+
+### Added
+- disable lazyload on demand (e.g. `ce_image.html5`)
+
 ## [1.0.4] - 2018-02-27
 
 ### Fixed
