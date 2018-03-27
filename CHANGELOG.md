@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2018-03-27
+
+### Added
+- Lazyload support images added by xhr requests e.g. masonry endless scroll
+- now supports `huh.utils.image` twig templates by invoke lazy load to template data by using `$GLOBALS['TL_HOOKS']['addImageToTemplateData']` 
+
+### Changed
+- Make js_lazyload js aggregatable
+- reduced `threshold` from 300 to 100px
+
 ## [1.0.5] - 2018-03-13
 
 ### Added

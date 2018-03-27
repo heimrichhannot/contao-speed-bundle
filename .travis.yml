@@ -1,10 +1,33 @@
 language: php
-php:
-- 7.1
-- 7.2
+git:
+  depth: 1
+cache:
+  directories:
+  - "$HOME/.composer/cache"
+sudo: false
 env:
-- CONTAO_VERSION="4.4.*"
-- CONTAO_VERSION="4.5.*"
+  global:
+  - COMPOSER_ALLOW_XDEBUG=0
+matrix:
+  include:
+    - php: 7.1
+      env: CONTAO_VERSION='4.4.*'
+    - php: 7.2
+      env: CONTAO_VERSION='4.4.*'
+    - php: 7.1
+      env: CONTAO_VERSION='4.5.*'
+    - php: 7.2
+      env: CONTAO_VERSION='4.5.*'
+    - php: 7.2
+      env: COVERAGE=1 CONTAO_VERSION='4.5.*'
+  allow_failures:
+    - env: COVERAGE=1 UPDATEDOC=1 DEFAULT=0
+  fast_finish: true
+before_install:
+- if [[ "$COVERAGE" != "1" ]]; then phpenv config-rm xdebug.ini || true; fi
+install:
+  - composer require contao/core-bundle:${CONTAO_VERSION}
+  - if [[ "$UPDATEDOC" = "1" ]]; then wget -O sami.phar http://get.sensiolabs.org/sami.phar; fi
 notifications:
   email:
     recipients:
@@ -15,9 +38,20 @@ notifications:
     rooms:
       secure: GuF2JuyCJ2Bpsdv6z1pr3598VdJxPIoXPZdd5PbLXZze7SZmP4Ve1g2T0pYyYINoWdTHeSgTCUBLGCquMTi4gj4yBfy8BjZrFrITqBcpw3o7uYOMxhhsoYgbujaXTN+NLrfxgzaV9Y6O898MpLrBu4gJBWA1Dil/Z1AQPyhbEagpqmVYiiz2PpWbTxnZjIgZZZx1bau3C/3wDaIM3aTKzMe2tw50BVefxRlxrAbnrNlJbFZ0KNkSEIfykpgbN0ecLNlYTeeHJn+47NuvxbFCrQUmu4BrvhZkq3PpaOrDkJdPUs9IEOOGFtdtWrkDpz0e21Em9U1cZ41WJNJxyRPZqEXLuFJ6R8Zcw8snVHh7T1dQw5MJpQB7nUtAvT75C7xj8e3/OMsmFg0jn8rOt1HxHLvWV8oKh+NrBY36jMbQUtMtej5VUFKtdBKZjXRsteX9OIn8/qcKkyGCCUJaSY2um0YzL9YTh7I07nP9ln4kQrGu1H+DZnBaUOzDeD3TcYHMqkl0FAW+Qn9ZX0LWmwJ47nbqfopc/e813LFkPEsU/b8HfDVBYqdrqyq+PO9qyYlnPuuU7vGSQGTMzd56kvQ2mhEpsfA/0GTkHOgeDztoza5JLen/cVjJ8kfogH1d/ieLK2LCIGk9BpfNTxMXMm0TiA17QLfbOos7Qg8pQSrV55U=
 before_script:
-- travis_wait composer install --no-interaction
+  - travis_wait composer install --no-interaction
 script:
-- mkdir -p build/logs
-- php vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - if [[ "$COVERAGE" = "1" ]]; then travis_retry mkdir -p build/logs; fi
+  - if [[ "$COVERAGE" = "1" ]]; then travis_retry php vendor/bin/phpunit --coverage-clover build/logs/clover.xml || true; fi
+  - if [[ "$UPDATEDOC" = "1" ]]; then travis_retry php sami.phar update ./docs/config/SamiDocConfig.php || true; fi
 after_script:
-- php vendor/bin/coveralls
+  - if [[ "$COVERAGE" = "1" ]]; then travis_retry php vendor/bin/php-coveralls -v; fi
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  local-dir: docs/build
+  on:
+    branch: master
+    condition: "$UPDATEDOC == '1'"
