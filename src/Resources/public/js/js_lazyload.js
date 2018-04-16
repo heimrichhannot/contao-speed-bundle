@@ -1,4 +1,5 @@
 (function(w, d) {
+    document.addEventListener("DOMContentLoaded", function(event) {
     var b = d.getElementsByTagName('body')[0];
     var s = d.createElement('script');
     s.async = true;
@@ -34,19 +35,22 @@
             elements_selector: '.lazy',
             threshold: 100
         }];
-    b.appendChild(s);
 
-    // listen on each ajax request and trigger update() on each lazyload instance
-    const send = XMLHttpRequest.prototype.send;
-    XMLHttpRequest.prototype.send = function() {
-        this.addEventListener('load', function() {
-            for (i in instances) {
-                if (instances.hasOwnProperty(i)) {
-                    instances[i].update();
+
+        b.appendChild(s);
+
+        // listen on each ajax request and trigger update() on each lazyload instance
+        const send = XMLHttpRequest.prototype.send;
+        XMLHttpRequest.prototype.send = function() {
+            this.addEventListener('load', function() {
+                for (i in instances) {
+                    if (instances.hasOwnProperty(i)) {
+                        instances[i].update();
+                    }
                 }
-            }
-        });
-        return send.apply(this, arguments)
-    }
+            });
+            return send.apply(this, arguments)
+        }
+    });
 
 }(window, document));

@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.1] - 2018-04-16
+
+### Fixed
+- bind `DOMContentLoaded` to lazyload script
+
 ## [1.1.0] - 2018-03-27
 
 ### Added
