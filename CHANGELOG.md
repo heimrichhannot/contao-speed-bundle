@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.1.3] - 2018-04-26
+
+### Fixed
+- `picture_lazyload.html5` template
+
 ## [1.1.2] - 2018-04-16
 
 ### Fixed
