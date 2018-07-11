@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2018-07-11
+
+### Changes
+- moved `image-wrapper` out of picture element in `picture_lazyload.html5` template to restore functionality for source elements
+
+> Caution: May lead to broken css styles!
+
 ## [1.1.3] - 2018-04-26
 
 ### Fixed
