@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.2.2] - 2018-11-28
+
+### Fixed
+- restore img css class in picture_lazyload.html5
+
 ## [1.2.1] - 2018-07-20
 
 ### Fixed
