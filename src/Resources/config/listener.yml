@@ -3,3 +3,4 @@ services:
       class: HeimrichHannot\SpeedBundle\EventListener\HookListener
       arguments:
         - "@contao.framework"
+      public: true
