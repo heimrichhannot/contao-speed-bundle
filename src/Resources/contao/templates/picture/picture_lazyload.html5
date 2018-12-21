@@ -1,9 +1,14 @@
-<div class="image-wrapper" style="padding-bottom: <?= $this->img['width'] == 0 ? 0 : number_format($this->img['height'] / $this->img['width'] * 100, 2, '.', ',') ?>%">
+<?php $wrapperID = 'image-wrapper-' . mt_rand(); ?>
+<div class="image-wrapper">
+    <style>'#' . <?= $wrapperID; ?> {padding-bottom: <?= $this->img['width'] == 0 ? 0 : number_format($this->img['height'] / $this->img['width'] * 100, 2, '.', ',') ?>%}</style>
 <?php if ($this->sources): ?>
     <picture>
         <!--[if IE 9]><video style="display: none;"><![endif]-->
         <?php foreach ($this->sources as $source): ?>
             <source data-srcset="{{env::url}}/<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?>>
+            <?php if($source['media']): ?>
+                <style>@media <?= $source['media']; ?>{'#' . <?= $wrapperID; ?> {padding-bottom: <?= $source['width'] == 0 ? 0 : number_format($source['height'] / $source['width'] * 100, 2, '.', ',') ?>%}}</style>
+            <?php endif; ?>
         <?php endforeach; ?>
         <!--[if IE 9]></video><![endif]-->
 <?php endif; ?>

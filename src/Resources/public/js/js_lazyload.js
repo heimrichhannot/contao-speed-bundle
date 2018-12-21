@@ -29,11 +29,35 @@
             // default image instance
             data_src: 'src',
             data_srcset: 'srcset',
-            threshold: 100
+            threshold: 100,
+            callback_enter: function (el) {
+                var event = new CustomEvent('lazyload:enter');
+                el.dispatchEvent(event);
+            },
+            callback_set: function (el) {
+                var event = new CustomEvent('lazyload:set');
+                el.dispatchEvent(event);
+            },
+            callback_load: function (el) {
+                var event = new CustomEvent('lazyload:load');
+                el.dispatchEvent(event);
+            }
         }, {
             // background image instance:  use lazy class on container and set data-src="[IMG_URL]" instead of style="background-image: url([IMG_URL]);"
             elements_selector: '.lazy',
-            threshold: 100
+            threshold: 100,
+            callback_enter: function (el) {
+                var event = new CustomEvent('lazyload:enter');
+                el.dispatchEvent(event);
+            },
+            callback_set: function (el) {
+                var event = new CustomEvent('lazyload:set');
+                el.dispatchEvent(event);
+            },
+            callback_load: function (el) {
+                var event = new CustomEvent('lazyload:load');
+                el.dispatchEvent(event);
+            }
         }];
 
 

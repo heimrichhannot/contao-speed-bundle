@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.3.0] - 2018-12-21
+
+### Added
+- callbacks `lazyload:enter`, `lazyload:set`, `lazyload:load`
+
+### Fixed
+- added styles to `pictury_lazyload.html5` that adjusts padding-bottom for media query image sizes
+
 ## [1.2.3] - 2018-12-18
 
 ### Fixed
