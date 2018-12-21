@@ -80,6 +80,12 @@ If you want to prevent your image from being lazy loaded, you have to adjust you
 ```
 *Example: ce_image.html5*
 
+If you use the `heimrichhannot/contao-utils-bundle` TwigExtension `image`, just add `'lazyload': false` to your item data.
+
+```
+{{ singleSRC|image([0,0,3],{'href' : url, 'lazyload': false})|raw }}
+```
+
 #### Callbacks
 
 In order to make adjustments like trigger animation on scroll after image has been loaded, there are some callbacks you might listen on the image:

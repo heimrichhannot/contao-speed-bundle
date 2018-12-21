@@ -57,6 +57,10 @@ class HookListener
     ) {
         global $objPage;
 
+        if (isset($item['lazyload']) && false === $item['lazyload']) {
+            return $templateData;
+        }
+
         /**
          * @var LayoutModel
          */

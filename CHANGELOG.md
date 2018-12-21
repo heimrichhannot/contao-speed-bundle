@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.0] - 2018-12-21
+
+### Added
+- support to disable lazyload within image (twig templates)
+
 ## [1.3.0] - 2018-12-21
 
 ### Added
