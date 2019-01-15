@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.1] - 2018-01-15
+
+### Fixed
+- selector in `picture_lazyload.html5` for responsive media query styles, thanks @seibtph (https://github.com/heimrichhannot/contao-speed-bundle/pull/2)
+
 ## [1.4.0] - 2018-12-21
 
 ### Added
