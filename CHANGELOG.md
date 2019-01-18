@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.4.2] - 2019-01-18
+
+### Fixed
+- correct calculation of padding for portrait format images in picture_lazyload template
+
 ## [1.4.1] - 2018-01-15
 
 ### Fixed
