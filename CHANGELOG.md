@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.1] - 2019-01-24
+
+### Fixed
+- lazyload in `picture_lazyload.html5` only set `height` (do not set `width`, otherwise lazyload will break)
+
 ## [1.5.0] - 2019-01-24
 
 ### Changed
