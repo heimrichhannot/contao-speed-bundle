@@ -1,19 +1,18 @@
 <?php $wrapperID = 'image-wrapper-' . mt_rand(); ?>
-<div id="<?= $wrapperID; ?>" class="image-wrapper<?php if ($this->class || !empty($this->img['class'])) echo trim($this->class. ' ' . $this->img['class']); ?>">
-    <style>'#' <?= $wrapperID; ?> ':not(.loaded)' {padding-bottom: <?= $this->img['width'] == 0 ? 0 : number_format(($this->img['height'] > $this->img['width'] ? ($this->img['width'] / $this->img['height']) : ($this->img['height'] / $this->img['width'])) * 100, 2, '.', ',') ?>%}</style>
+<div id="<?= $wrapperID; ?>" class="image-wrapper<?php if ($this->class || !empty($this->img['class'])) echo ' '. trim($this->class. ' ' . $this->img['class']); ?>">
+    <?php $wrapperStyles[] = ('#' . $wrapperID . ':not(.loaded){width: ' . ($this->img['width'] . 'px') . ';height:' . ($this->img['height'] . 'px') . '}'); ?>
     <?php if ($this->sources): ?>
     <picture>
         <!--[if IE 9]><video style="display: none;"><![endif]-->
         <?php foreach ($this->sources as $source): ?>
             <source data-srcset="{{env::url}}/<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?>>
             <?php if($source['media']): ?>
-                <style>@media <?= $source['media']; ?>{'#' <?= $wrapperID; ?>  ':not(.loaded)' {padding-bottom: <?= $source['width'] == 0 ? 0 : number_format(($source['height'] > $source['width'] ? ($source['width'] / $source['height']) : ($source['height'] / $source['width'])) * 100, 2, '.', ',') ?>%}}</style>
+                <?php $wrapperStyles[] = ('@media ' . $source['media'] . '{#' . $wrapperID . ':not(.loaded){width: ' . ($source['width'] . 'px') . ';height:' . ($source['height'] . 'px') . '}}'); ?>
             <?php endif; ?>
         <?php endforeach; ?>
         <!--[if IE 9]></video><![endif]-->
         <?php endif; ?>
-        <img class="image" data-lazy="{{env::url}}/<?= $this->img['src'] ?>" data-src="{{env::url}}/<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' data-srcset="{{env::url}}/' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?>alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?= $this->attributes ?>itemprop="image">
-        
+        <img data-wrapper="#<?= $wrapperID; ?>" data-wrapper-style="<?= implode('', $wrapperStyles); ?>" class="image" data-lazy="{{env::url}}/<?= $this->img['src'] ?>" data-src="{{env::url}}/<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' data-srcset="{{env::url}}/' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . trim($this->img['width']) . '" height="' . trim($this->img['height']) . '"'; ?>alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?= $this->attributes ?>itemprop="image">
         <?php if ($this->sources): ?>
     </picture>
 <?php endif; ?>

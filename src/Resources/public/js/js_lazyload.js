@@ -1,5 +1,5 @@
-(function(w, d) {
-    document.addEventListener("DOMContentLoaded", function(event) {
+(function (w, d) {
+    document.addEventListener("DOMContentLoaded", function (event) {
         var b = d.getElementsByTagName('body')[0];
         var s = d.createElement('script');
         s.async = true;
@@ -19,9 +19,29 @@
         var instances = [];
 
         // Listen to the Initialized event
-        window.addEventListener('LazyLoad::Initialized', function(e) {
+        window.addEventListener('LazyLoad::Initialized', function (e) {
             // Get the instance and puts it in the lazyLoadInstance variable
             instances.push(e.detail.instance);
+
+            var wrapperStyles = [];
+
+            if (typeof e.detail.instance._elements !== 'undefined' && e.detail.instance._elements.length > 0) {
+                e.detail.instance._elements.forEach(function (el) {
+                    var wrapperStyle = el.getAttribute('data-wrapper-style');
+
+                    if (wrapperStyle) {
+                        wrapperStyles.push(wrapperStyle);
+                    }
+                });
+
+                if (wrapperStyles.length > 0) {
+                    var linkElement = document.createElement('link');
+                    linkElement.setAttribute('rel', 'stylesheet');
+                    linkElement.setAttribute('href', 'data:text/css;charset=UTF-8,' + encodeURIComponent(wrapperStyles.join('')));
+                    document.querySelector('head').appendChild(linkElement);
+                }
+            }
+
         }, false);
 
         w.lazyLoadOptions = [
@@ -33,6 +53,15 @@
                 callback_enter: function (el) {
                     var event = new CustomEvent('lazyload:enter');
                     el.dispatchEvent(event);
+
+                    var styleData = el.getAttribute('data-style');
+
+                    if (styleData) {
+                        var linkElement = this.document.createElement('link');
+                        linkElement.setAttribute('rel', 'stylesheet');
+                        linkElement.setAttribute('href', 'data:text/css;charset=UTF-8,' + encodeURIComponent(styleData));
+                        document.querySelector('head').appendChild(linkElement);
+                    }
                 },
                 callback_set: function (el) {
                     var event = new CustomEvent('lazyload:set');
@@ -44,7 +73,7 @@
 
                     var wrapperId = el.getAttribute('data-wrapper');
                     if(null !== wrapperId){
-                        var wrapper = document.querySelector(el.getAttribute('data-wrapper'))
+                        var wrapper = document.querySelector(el.getAttribute('data-wrapper'));
                         wrapper.classList.add('loaded');
                     }
                 }
@@ -71,8 +100,8 @@
 
         // listen on each ajax request and trigger update() on each lazyload instance
         const send = XMLHttpRequest.prototype.send;
-        XMLHttpRequest.prototype.send = function() {
-            this.addEventListener('load', function() {
+        XMLHttpRequest.prototype.send = function () {
+            this.addEventListener('load', function () {
                 for (i in instances) {
                     if (instances.hasOwnProperty(i)) {
                         instances[i].update();

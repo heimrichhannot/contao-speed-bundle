@@ -1,6 +1,12 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.5.0] - 2019-01-24
+
+### Changed
+- do no longer maintain image aspect ratio with `padding`, instead use `width` and `height` of the images and sources
+- no longer handle styles inside `body` tag, use `link` tag instead
+
 ## [1.4.2] - 2019-01-18
 
 ### Fixed

@@ -333,6 +333,6 @@ class HookListenerTest extends ContaoTestCase
      */
     public static function getRootDir()
     {
-        return __DIR__.DIRECTORY_SEPARATOR.'Fixtures';
+        return __DIR__.\DIRECTORY_SEPARATOR.'Fixtures';
     }
 }
