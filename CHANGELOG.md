@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.7.0] - 2019-02-28
+
+### Changed
+- provide `lazyLoadInstances` via `window.lazyLoadInstances` in order to provide `update()` support for 3rd party plugins
+
 ## [1.6.0] - 2019-02-05
 
 ### Added

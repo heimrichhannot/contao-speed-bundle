@@ -16,12 +16,12 @@
 
         s.src = '/assets/lazyload/js/' + v + '/lazyload.min.js';
 
-        var instances = [];
+        window.lazyLoadInstances = [];
 
         // Listen to the Initialized event
         window.addEventListener('LazyLoad::Initialized', function (e) {
             // Get the instance and puts it in the lazyLoadInstance variable
-            instances.push(e.detail.instance);
+            window.lazyLoadInstances.push(e.detail.instance);
 
             var wrapperStyles = [];
 
@@ -102,9 +102,9 @@
         const send = XMLHttpRequest.prototype.send;
         XMLHttpRequest.prototype.send = function () {
             this.addEventListener('load', function () {
-                for (i in instances) {
-                    if (instances.hasOwnProperty(i)) {
-                        instances[i].update();
+                for (i in window.lazyLoadInstances) {
+                    if (window.lazyLoadInstances.hasOwnProperty(i)) {
+                        window.lazyLoadInstances[i].update();
                     }
                 }
             });
