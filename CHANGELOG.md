@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.0] - 2019-02-28
+
+### Changed
+- fixed aspect ratio image-wrapper sizing in order to respect max image width/height dimension, added `image-aspect-ratio` wrapper inside `image-wrapper` that yields padding-bottom, and `image-wrapper` now has max-width/max-height from image properties
+- added `<noscript>` support
+- speed-bundle `js` is now shipped with `@hundh/contao-speed-bundle` npm package 
+- make usage of `verlok/lazyload` version 11
+- drop element `lazyload:set` event (use `lazyload:reveal` event instead)
+- add `window.lazyImagesInstance` with `update`, `updateImages` and `updateWrappers` function for usage in 3rd party plugins
+
 ## [1.7.0] - 2019-02-28
 
 ### Changed

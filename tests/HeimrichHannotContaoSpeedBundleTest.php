@@ -3,12 +3,12 @@
 /*
  * Copyright (c) 2019 Heimrich & Hannot GmbH
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\SpeedBundle\Tests;
 
-use HeimrichHannot\SpeedBundle\HeimrichHannotContaoSpeedBundle;
+use HeimrichHannot\SpeedBundle\ContaoSpeedBundle;
 use PHPUnit\Framework\TestCase;
 
 class HeimrichHannotContaoSpeedBundleTest extends TestCase
@@ -18,9 +18,9 @@ class HeimrichHannotContaoSpeedBundleTest extends TestCase
      */
     public function testCanBeInstantiated()
     {
-        $bundle = new HeimrichHannotContaoSpeedBundle();
+        $bundle = new ContaoSpeedBundle();
 
-        $this->assertInstanceOf(HeimrichHannotContaoSpeedBundle::class, $bundle);
+        $this->assertInstanceOf(ContaoSpeedBundle::class, $bundle);
     }
 
     /**
@@ -28,10 +28,10 @@ class HeimrichHannotContaoSpeedBundleTest extends TestCase
      */
     public function testReturnsTheContainerExtension()
     {
-        $bundle = new HeimrichHannotContaoSpeedBundle();
+        $bundle = new ContaoSpeedBundle();
 
         $this->assertInstanceOf(
-            'HeimrichHannot\SpeedBundle\DependencyInjection\HeimrichHannotContaoSpeedExtension',
+            'HeimrichHannot\SpeedBundle\DependencyInjection\ContaoSpeedExtension',
             $bundle->getContainerExtension()
         );
     }

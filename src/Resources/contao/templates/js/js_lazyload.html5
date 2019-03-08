@@ -1,5 +1,3 @@
 <?php
-// Add the lazyload style sheet
-$GLOBALS['TL_CSS'][]        = TL_ASSETS_URL . 'assets/lazyload/css/lazyload.min.css|static';
-$GLOBALS['TL_JAVASCRIPT'][] = 'bundles/heimrichhannotcontaospeed/js/js_lazyload.min.js|static';
-?>
+$GLOBALS['TL_CSS']['contao-speed-bundle']        = '/bundles/contaospeed/css/contao-speed-bundle.css|static';
+$GLOBALS['TL_JAVASCRIPT']['contao-speed-bundle'] = '/bundles/contaospeed/js/contao-speed-bundle.js';

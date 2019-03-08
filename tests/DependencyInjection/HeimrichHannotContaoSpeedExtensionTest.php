@@ -3,12 +3,12 @@
 /*
  * Copyright (c) 2019 Heimrich & Hannot GmbH
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\SpeedBundle\Tests\DependencyInjection;
 
-use HeimrichHannot\SpeedBundle\DependencyInjection\HeimrichHannotContaoSpeedExtension;
+use HeimrichHannot\SpeedBundle\DependencyInjection\ContaoSpeedExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -29,7 +29,7 @@ class HeimrichHannotContaoSpeedExtensionTest extends TestCase
 
         $this->container = new ContainerBuilder(new ParameterBag(['kernel.debug' => false]));
 
-        $extension = new HeimrichHannotContaoSpeedExtension();
+        $extension = new ContaoSpeedExtension();
         $extension->load([], $this->container);
     }
 
@@ -38,8 +38,8 @@ class HeimrichHannotContaoSpeedExtensionTest extends TestCase
      */
     public function testCanBeInstantiated()
     {
-        $extension = new HeimrichHannotContaoSpeedExtension();
+        $extension = new ContaoSpeedExtension();
 
-        $this->assertInstanceOf(HeimrichHannotContaoSpeedExtension::class, $extension);
+        $this->assertInstanceOf(ContaoSpeedExtension::class, $extension);
     }
 }

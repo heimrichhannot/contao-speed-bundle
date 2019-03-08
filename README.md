@@ -86,6 +86,10 @@ If you use the `heimrichhannot/contao-utils-bundle` TwigExtension `image`, just 
 {{ singleSRC|image([0,0,3],{'href' : url, 'lazyload': false})|raw }}
 ```
 
+#### Update lazy load on demand
+
+If you need to update your lazy load instances on demand, for example using the barba.js PJAX page transition plugin, use the `window.lazyLoad.update()` function.
+
 #### Callbacks
 
 In order to make adjustments like trigger animation on scroll after image has been loaded, there are some callbacks you might listen on the image:

@@ -1,0 +1,19 @@
+{
+  "name": "contao-speed-bundle",
+  "version": "1.0.0",
+  "description": "This bundle offers various improvements to speed up your Contao CMS.",
+  "author": "Heimrich & Hannot GmbH <digitales@heimrich-hannot.de>",
+  "license": "LGPL-3.0-or-later",
+  "dependencies": {
+    "@hundh/contao-speed-bundle": "^1.1",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-classes": "^7.2",
+    "@symfony/webpack-encore": "^0.22.2"
+  },
+  "scripts": {
+    "build-dev": "yarn encore dev",
+    "build-production": "yarn encore production"
+  }
+}

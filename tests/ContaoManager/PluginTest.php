@@ -3,7 +3,7 @@
 /*
  * Copyright (c) 2019 Heimrich & Hannot GmbH
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\SpeedBundle\Test\ContaoManager;
@@ -12,7 +12,7 @@ use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\DelegatingParser;
 use HeimrichHannot\SpeedBundle\ContaoManager\Plugin;
-use HeimrichHannot\SpeedBundle\HeimrichHannotContaoSpeedBundle;
+use HeimrichHannot\SpeedBundle\ContaoSpeedBundle;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -41,7 +41,7 @@ class PluginTest extends TestCase
 
         static::assertCount(1, $bundles);
         static::assertInstanceOf(BundleConfig::class, $bundles[0]);
-        static::assertSame(HeimrichHannotContaoSpeedBundle::class, $bundles[0]->getName());
+        static::assertSame(ContaoSpeedBundle::class, $bundles[0]->getName());
         static::assertSame([ContaoCoreBundle::class], $bundles[0]->getLoadAfter());
     }
 }

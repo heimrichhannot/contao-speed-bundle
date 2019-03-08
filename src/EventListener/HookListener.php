@@ -3,7 +3,7 @@
 /*
  * Copyright (c) 2019 Heimrich & Hannot GmbH
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\SpeedBundle\EventListener;
@@ -70,7 +70,7 @@ class HookListener
             return $templateData;
         }
 
-        if (!in_array('js_lazyload', StringUtil::deserialize($layout->scripts, true), true)) {
+        if (!\in_array('js_lazyload', StringUtil::deserialize($layout->scripts, true), true)) {
             return $templateData;
         }
 
@@ -101,7 +101,7 @@ class HookListener
             return;
         }
 
-        if (!in_array('js_lazyload', StringUtil::deserialize($layout->scripts, true), true)) {
+        if (!\in_array('js_lazyload', StringUtil::deserialize($layout->scripts, true), true)) {
             return;
         }
 

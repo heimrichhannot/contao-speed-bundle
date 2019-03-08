@@ -5,8 +5,7 @@
   "license": "LGPL-3.0-or-later",
   "require": {
     "php": "^7.1",
-    "contao/core-bundle": "^4.4",
-    "heimrichhannot-contao-components/lazyload": "^1.2.2"
+    "contao/core-bundle": "^4.4"
   },
   "require-dev": {
     "contao/test-case": "^1.1",
@@ -41,6 +40,7 @@
     "preferred-install": "dist"
   },
   "extra": {
-    "contao-manager-plugin": "HeimrichHannot\\SpeedBundle\\ContaoManager\\Plugin"
+    "contao-manager-plugin": "HeimrichHannot\\SpeedBundle\\ContaoManager\\Plugin",
+    "foxy": true
   }
 }

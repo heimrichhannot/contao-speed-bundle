@@ -3,7 +3,7 @@
 /*
  * Copyright (c) 2019 Heimrich & Hannot GmbH
  *
- * @license LGPL-3.0+
+ * @license LGPL-3.0-or-later
  */
 
 namespace HeimrichHannot\SpeedBundle\DependencyInjection;
@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
-class HeimrichHannotContaoSpeedExtension extends Extension
+class ContaoSpeedExtension extends Extension
 {
     /**
      * {@inheritdoc}
