@@ -105,7 +105,7 @@ In order to make adjustments like trigger animation on scroll after image has be
 
 #### 😋 Tips & tricks
 
-### Do NOT use placeholder images
+##### Do NOT use placeholder images
 
 Taken from the `verlok/lazyload` github README.md:
 
