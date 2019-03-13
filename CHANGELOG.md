@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.1] - 2019-03-13
+
+### Fixed
+- missing spaces between alt and itemprop attributes in `picture_lazyload.html5` (see: #3)
+
 ## [1.8.0] - 2019-02-28
 
 ### Changed
