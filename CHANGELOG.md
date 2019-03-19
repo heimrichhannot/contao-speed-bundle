@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.2] - 2019-03-19
+
+### Fixed
+- typo in options for `data_bg` property
+
 ## [1.8.1] - 2019-03-13
 
 ### Fixed
