@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.3] - 2019-03-19
+
+### Fixed
+- added missing `contao-speed-bundle.css` file
+
 ## [1.8.2] - 2019-03-19
 
 ### Fixed
