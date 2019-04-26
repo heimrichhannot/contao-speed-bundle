@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.4] - 2019-04-25
+
+### Fixed
+* w3c validator error in `picture_lazyload.html.twig` occured by lazyload technique, removed `tns-lazy-image` class and `data-lazy` support
+
 ## [1.8.3] - 2019-03-19
 
 ### Fixed

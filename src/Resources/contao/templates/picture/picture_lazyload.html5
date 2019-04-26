@@ -7,7 +7,7 @@
         <picture>
             <!--[if IE 9]><video style="display: none;"><![endif]-->
             <?php foreach ($this->sources as $source): ?>
-                <source data-srcset="{{env::url}}/<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?>>
+                <source srcset="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=" data-srcset="{{env::url}}/<?= $source['srcset'] ?>"<?php if (!empty($source['sizes'])) echo ' sizes="' . $source['sizes'] . '"'; ?><?php if (!empty($source['media'])) echo ' media="' . $source['media'] . '"'; ?>>
                 <?php if($source['media']): ?>
                     <?php $wrapperStyles[] = ('@media ' . $source['media'] . '{#' . $wrapperID . ':not(.loaded){max-width:' . ($source['width'] == 0 ? 'none' : ($source['width'] . 'px')) . ';max-height:'.($source['height'] == 0 ? 'none' : ($source['height'] . 'px')).'}}'); ?>
                     <?php $wrapperStyles[] = ('@media ' . $source['media'] . '{#' . $wrapperID . ':not(.loaded) .image-aspect-ratio{padding-bottom:' . ($source['width'] == 0 ? 0 : (number_format(($source['height'] / $source['width']) * 100, 2, '.', ',') . '%')) . '}}'); ?>
@@ -15,13 +15,19 @@
             <?php endforeach; ?>
             <!--[if IE 9]></video><![endif]-->
             <?php endif; ?>
-            <noscript>
-                <img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?php if ($this->class || !empty($this->img['class'])) echo ' class="' . trim($this->class. ' ' . $this->img['class']) . '"'; ?><?= $this->attributes ?> itemprop="image">
-            </noscript>
-            <img data-wrapper="#<?= $wrapperID; ?>" data-wrapper-style="<?= implode('', $wrapperStyles); ?>" class="tns-lazy-image image lazy-img" data-lazy="{{env::url}}/<?= $this->img['src'] ?>" data-src="{{env::url}}/<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' data-srcset="{{env::url}}/' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . trim($this->img['width']) . '" height="' . trim($this->img['height']) . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?= $this->attributes ?> itemprop="image">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII=" data-wrapper="#<?= $wrapperID; ?>" data-wrapper-style="<?= implode('', $wrapperStyles); ?>" class="image lazy-img" data-src="{{env::url}}/<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' data-srcset="{{env::url}}/' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . trim($this->img['width']) . '" height="' . trim($this->img['height']) . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?= $this->attributes ?> itemprop="image">
             <?php if ($this->sources): ?>
         </picture>
     <?php endif; ?>
+    <noscript>
+        <?php if ($this->sources): ?>
+            <picture>
+        <?php endif; ?>
+        <img src="<?= $this->img['src'] ?>"<?php if ($this->img['srcset'] !== $this->img['src']) echo ' srcset="' . $this->img['srcset'] . '"'; ?><?php if (!empty($this->img['sizes'])) echo ' sizes="' . $this->img['sizes'] . '"'; elseif (!$this->sources && !empty($this->img['width']) && !empty($this->img['height'])) echo ' width="' . $this->img['width'] . '" height="' . $this->img['height'] . '"'; ?> alt="<?= $this->alt ?>"<?php if ($this->title) echo ' title="' . $this->title . '"'; ?><?php if ($this->class || !empty($this->img['class'])) echo ' class="' . trim($this->class. ' ' . $this->img['class']) . '"'; ?><?= $this->attributes ?> itemprop="image">
+        <?php if ($this->sources): ?>
+            </picture>
+        <?php endif; ?>
+    </noscript>
     </div>
 </div>
 <?php if ($this->sources || $this->img['src'] !== $this->img['srcset']): ?>
@@ -31,3 +37,4 @@
         });
     </script>
 <?php endif; ?>
+
