@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.8.5] - 2019-05-14
+
+### Fixed
+* inherit `lazyload` in `picture` attributes properly from image attributes 
+
 ## [1.8.4] - 2019-04-25
 
 ### Fixed

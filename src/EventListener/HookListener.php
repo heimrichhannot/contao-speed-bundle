@@ -74,7 +74,7 @@ class HookListener
             return $templateData;
         }
 
-        $templateData['picture']['lazyload'] = true;
+        $templateData['picture']['lazyload'] = $item['lazyload'] ?? true;
 
         return $templateData;
     }
