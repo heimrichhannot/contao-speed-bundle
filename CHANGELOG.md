@@ -1,15 +1,20 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.9.0] - 2019-08-22
+
+### Added
+- `$GLOBALS['skipLazyLoad']` to avoid using lazy load for certain templates
+
 ## [1.8.5] - 2019-05-14
 
 ### Fixed
-* inherit `lazyload` in `picture` attributes properly from image attributes 
+- inherit `lazyload` in `picture` attributes properly from image attributes 
 
 ## [1.8.4] - 2019-04-25
 
 ### Fixed
-* w3c validator error in `picture_lazyload.html.twig` occured by lazyload technique, removed `tns-lazy-image` class and `data-lazy` support
+- w3c validator error in `picture_lazyload.html.twig` occured by lazyload technique, removed `tns-lazy-image` class and `data-lazy` support
 
 ## [1.8.3] - 2019-03-19
 
