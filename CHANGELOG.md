@@ -1,6 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.9.1] - 2023-02-08
+- Changed: allow php 8.0
+
 ## [1.9.0] - 2019-08-22
 
 ### Added
